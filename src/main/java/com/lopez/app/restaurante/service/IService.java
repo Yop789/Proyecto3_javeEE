@@ -1,4 +1,4 @@
-package com.lopez.app.restaurante.repositories;
+package com.lopez.app.restaurante.service;
 
 import java.util.List;
 import java.util.Optional;
