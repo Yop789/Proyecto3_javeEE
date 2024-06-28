@@ -29,7 +29,7 @@ List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes");
             <h2>Listado de Clientes</h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<%= request.getContextPath() %>/cliente/alta" class="btn btn-success">Alta de Cliente</a>
+            <a href="<%= request.getContextPath() %>/clientes/alta" class="btn btn-success">Alta de Cliente</a>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 package com.lopez.app.restaurante.models.Enum;
 
-public enum Estado {
+public enum EnumEstado {
     AGUASCALIENTES,
     BAJA_CALIFORNIA,
     BAJA_CALIFORNIA_SUR,

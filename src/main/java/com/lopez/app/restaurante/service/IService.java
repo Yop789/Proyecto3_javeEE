@@ -13,5 +13,4 @@ public interface IService<T> {
 
     void eliminar(Long id);
 
-    void edit(T t);
 }

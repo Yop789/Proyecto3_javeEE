@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lopez.app.restaurante.models.Cliente;
-import com.lopez.app.restaurante.models.Enum.Estado;
+import com.lopez.app.restaurante.models.Enum.EnumEstado;
 
 public class ClienteRepo implements IRepository<Cliente> {
     private Connection conn;
@@ -74,8 +74,8 @@ public class ClienteRepo implements IRepository<Cliente> {
             stm.setString(4, t.getTelefono());
             stm.setString(5, t.getCorreo());
             stm.setString(6, t.getCalle());
-            stm.setLong(7, t.getNum_interno());
-            stm.setLong(8, t.getNum_externo());
+            stm.setLong(7, t.getNum_interior());
+            stm.setLong(8, t.getNum_exterior());
             stm.setString(9, t.getColonia());
             stm.setString(10, t.getCiudad());
             stm.setString(11, t.getEstado().name().toString());
@@ -102,12 +102,13 @@ public class ClienteRepo implements IRepository<Cliente> {
         c.setTelefono(rs.getString("TELEFONO"));
         c.setCorreo(rs.getString("CORREO"));
         c.setCalle(rs.getString("CALLE"));
-        c.setNum_interno(rs.getLong("NUMERO_INT"));
-        c.setNum_externo(rs.getLong("NUMERO_EXT"));
+        c.setNum_exterior(rs.getLong("NUMERO_INT"));
+        c.setNum_exterior(rs.getLong("NUMERO_EXT"));
         c.setColonia(rs.getString("COLONIA"));
         c.setCiudad(rs.getString("CIUDAD"));
-        c.setEstado(Estado.valueOf(rs.getString("ESTADO")));
+        c.setEstado(EnumEstado.valueOf(rs.getString("ESTADO")));
         c.setCp(rs.getInt("CODIGO_POSTAL"));
+        c.setFecha_nacimiento(rs.getDate("FECHA_NACIMIENTO"));
         return c;
     }
 }

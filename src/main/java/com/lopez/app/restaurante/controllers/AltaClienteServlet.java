@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.lopez.app.restaurante.models.Cliente;
-import com.lopez.app.restaurante.models.Enum.Estado;
+import com.lopez.app.restaurante.models.Enum.EnumEstado;
 import com.lopez.app.restaurante.service.ClienteService;
 import com.lopez.app.restaurante.service.IService;
 
@@ -125,12 +125,12 @@ public class AltaClienteServlet extends HttpServlet {
             cliente.setTelefono(telefono);
             cliente.setCorreo(correo);
             cliente.setCalle(calle);
-            cliente.setNum_interno(num_interno);
-            cliente.setNum_externo(num_externo);
+            cliente.setNum_interior(num_interno);
+            cliente.setNum_exterior(num_externo);
             cliente.setColonia(colonia);
             cliente.setCiudad(ciudad);
             cliente.setCp(cp);
-            cliente.setEstado(Estado.valueOf(estado));
+            cliente.setEstado(EnumEstado.valueOf(estado));
             service.guardar(cliente);
             resp.sendRedirect(req.getContextPath() + "/clientes/listar");
         } else {

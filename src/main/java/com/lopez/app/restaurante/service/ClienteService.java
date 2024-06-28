@@ -50,8 +50,4 @@ public class ClienteService implements IService<Cliente> {
 
     }
 
-    @Override
-    public void edit(Cliente cliente) {
-
-    }
 }
