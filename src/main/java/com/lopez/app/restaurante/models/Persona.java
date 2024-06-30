@@ -1,6 +1,6 @@
 package com.lopez.app.restaurante.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.lopez.app.restaurante.models.Enum.EnumEstado;
 
@@ -14,17 +14,17 @@ public class Persona {
     private String calle;
     private Long num_interior;
     private Long num_exterior;
-    private Date fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
     private String colonia;
     private String ciudad;
     private Integer cp;
     private EnumEstado estado;
 
-    public Date getFecha_nacimiento() {
+    public LocalDate getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

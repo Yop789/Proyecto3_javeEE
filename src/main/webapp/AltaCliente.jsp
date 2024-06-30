@@ -1,9 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> 
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="java.util.*" %>
-<%@page import="com.lopez.app.restaurante.models.Enum.Estado" %>
+<%@page import="com.lopez.app.restaurante.models.Enum.*" %>
 
-<% 
-Map<String, String> errores = (Map<String, String>) request.getAttribute("errores");
+<%
+Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Formulario Alta Cliente</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -24,19 +24,19 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-     <%@ include file="Header.jsp" %>
+    <%@ include file="Header.jsp" %>
 
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h2>Formulario alta camiones</h2>
+          <h2>Formulario Alta Cliente</h2>
         </div>
       </div>
 
       <br>
-      <% if (errores != null && !errores.isEmpty()) { %>
+      <% if (errors != null && !errors.isEmpty()) { %>
         <ul class="alert alert-danger mx-5 px-5">
-          <% for (String e : errores.values()) { %>
+          <% for (String e : errors.values()) { %>
             <li><%= e %></li>
           <% } %>
         </ul>
@@ -54,8 +54,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("nombre") != null ? request.getParameter("nombre") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("nombre")) { %>
-                <span class="text-danger"><%= errores.get("nombre") %></span>
+              <% if (errors != null && errors.containsKey("nombre")) { %>
+                <span class="text-danger"><%= errors.get("nombre") %></span>
               <% } %>
             </div>
             
@@ -68,8 +68,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("apPaterno") != null ? request.getParameter("apPaterno") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("apPaterno")) { %>
-                <span class="text-danger"><%= errores.get("apPaterno") %></span>
+              <% if (errors != null && errors.containsKey("apPaterno")) { %>
+                <span class="text-danger"><%= errors.get("apPaterno") %></span>
               <% } %>
             </div>
             <div class="form-group">
@@ -81,13 +81,25 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("apMaterno") != null ? request.getParameter("apMaterno") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("apMaterno")) { %>
-                <span class="text-danger"><%= errores.get("apMaterno") %></span>
+              <% if (errors != null && errors.containsKey("apMaterno")) { %>
+                <span class="text-danger"><%= errors.get("apMaterno") %></span>
               <% } %>
             </div>
-
             <div class="form-group">
-              <label for="telefono">Telefono</label>
+              <label for="fechaNacimiento">Fecha Nacimiento</label>
+              <input 
+                type="date" 
+                id="fechaNacimiento" 
+                name="fechaNacimiento" 
+                class="form-control" 
+                value="<%= request.getParameter("fechaNacimiento") != null ? request.getParameter("fechaNacimiento") : "" %>"
+              />
+              <% if (errors != null && errors.containsKey("fechaNacimiento")) { %>
+                <span class="text-danger"><%= errors.get("fechaNacimiento") %></span>
+              <% } %>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
               <input
                 type="text"
                 id="telefono"
@@ -95,8 +107,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("telefono") != null ? request.getParameter("telefono") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("telefono")) { %>
-                <span class="text-danger"><%= errores.get("telefono") %></span>
+              <% if (errors != null && errors.containsKey("telefono")) { %>
+                <span class="text-danger"><%= errors.get("telefono") %></span>
               <% } %>
             </div>
 
@@ -109,8 +121,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("correo") != null ? request.getParameter("correo") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("correo")) { %>
-                <span class="text-danger"><%= errores.get("correo") %></span>
+              <% if (errors != null && errors.containsKey("correo")) { %>
+                <span class="text-danger"><%= errors.get("correo") %></span>
               <% } %>
             </div>
 
@@ -123,13 +135,13 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("calle") != null ? request.getParameter("calle") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("calle")) { %>
-                <span class="text-danger"><%= errores.get("calle") %></span>
+              <% if (errors != null && errors.containsKey("calle")) { %>
+                <span class="text-danger"><%= errors.get("calle") %></span>
               <% } %>
             </div>
 
             <div class="form-group">
-              <label for="numExterior">Numero Exterior</label>
+              <label for="numExterior">Número Exterior</label>
               <input
                 type="number"
                 id="numExterior"
@@ -137,12 +149,12 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("numExterior") != null ? request.getParameter("numExterior") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("numExterior")) { %>
-                <span class="text-danger"><%= errores.get("numExterior") %></span>
+              <% if (errors != null && errors.containsKey("numExterior")) { %>
+                <span class="text-danger"><%= errors.get("numExterior") %></span>
               <% } %>
             </div>
             <div class="form-group">
-              <label for="numInterior">Numero Interior</label>
+              <label for="numInterior">Número Interior</label>
               <input
                 type="number"
                 id="numInterior"
@@ -150,8 +162,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("numInterior") != null ? request.getParameter("numInterior") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("numInterior")) { %>
-                <span class="text-danger"><%= errores.get("numInterior") %></span>
+              <% if (errors != null && errors.containsKey("numInterior")) { %>
+                <span class="text-danger"><%= errors.get("numInterior") %></span>
               <% } %>
             </div>
 
@@ -164,8 +176,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("colonia") != null ? request.getParameter("colonia") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("colonia")) { %>
-                <span class="text-danger"><%= errores.get("colonia") %></span>
+              <% if (errors != null && errors.containsKey("colonia")) { %>
+                <span class="text-danger"><%= errors.get("colonia") %></span>
               <% } %>
             </div>
             <div class="form-group">
@@ -177,42 +189,31 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("ciudad") != null ? request.getParameter("ciudad") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("ciudad")) { %>
-                <span class="text-danger"><%= errores.get("ciudad") %></span>
+              <% if (errors != null && errors.containsKey("ciudad")) { %>
+                <span class="text-danger"><%= errors.get("ciudad") %></span>
               <% } %>
             </div>
 
-           <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <select
-                        id="estado"
-                        name="estado"
-                        class="form-control"
-                        aria-label="Default select example"
-                    >
-                        <option value="">---selecciona un estado de México---</option>
-                        <%
-                            String selectedEstado = request.getParameter("estado");
-                            Estado selectedEstadoEnum = null;
-                            if (selectedEstado != null && !selectedEstado.isEmpty()) {
-                                try {
-                                    selectedEstadoEnum = Estado.valueOf(selectedEstado);
-                                } catch (IllegalArgumentException e) {
-                                    // El valor del parámetro no coincide con ninguno de los valores de Estado
-                                }
-                            }
-                        %>
-                        <% for (Estado c : Estado.values()) { %>
-                            <option value="<%= c %>" <%= (selectedEstadoEnum != null && c.equals(selectedEstadoEnum)) ? "selected" : "" %>><%= c %></option>
-                        <% } %>
-                    </select>
-                    <% if (errores != null && errores.containsKey("estado")) { %>
-                        <span class="text-danger"><%= errores.get("estado") %></span>
-                    <% } %>
-                </div>
+            <div class="form-group">
+              <label for="estado">Estado</label>
+              <select
+                id="estado"
+                name="estado"
+                class="form-control"
+                aria-label="Default select example"
+              >
+                <option value="">---selecciona un estado de México---</option>
+                <% for (EnumEstado c : EnumEstado.values()) { %>
+                  <option value="<%= c %>" <%= c.name().equals(request.getParameter("estado")) ? "selected" : "" %>><%= c %></option>
+                <% } %>
+              </select>
+              <% if (errors != null && errors.containsKey("estado")) { %>
+                <span class="text-danger"><%= errors.get("estado") %></span>
+              <% } %>
+            </div>
 
             <div class="form-group">
-              <label for="cp">Codigo Postal</label>
+              <label for="cp">Código Postal</label>
               <input
                 type="number"
                 id="cp"
@@ -220,8 +221,8 @@ Map<String, String> errores = (Map<String, String>) request.getAttribute("errore
                 class="form-control"
                 value="<%= request.getParameter("cp") != null ? request.getParameter("cp") : "" %>"
               />
-              <% if (errores != null && errores.containsKey("cp")) { %>
-                <span class="text-danger"><%= errores.get("cp") %></span>
+              <% if (errors != null && errors.containsKey("cp")) { %>
+                <span class="text-danger"><%= errors.get("cp") %></span>
               <% } %>
             </div>
             

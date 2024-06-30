@@ -4,7 +4,7 @@
 
 <%
 // Recuperamos la lista de clientes que seteamos en el request desde el servlet
-List<DescripcioOrden> platillos = (List<DescripcioOrden>) request.getAttribute("platillos");
+List<Platillo> platillos = (List<Platillo>) request.getAttribute("platillos");
 %>
 
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ List<DescripcioOrden> platillos = (List<DescripcioOrden>) request.getAttribute("
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (DescripcioOrden m: platillos) { %>
+                        <% for (Platillo m: platillos) { %>
                         <tr>
                             <td><%= m.getId() %></td>
                             <td><%= m.getNombre() %></td>

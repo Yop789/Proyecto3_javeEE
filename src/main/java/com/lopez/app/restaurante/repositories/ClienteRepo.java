@@ -1,6 +1,7 @@
 package com.lopez.app.restaurante.repositories;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,40 +58,60 @@ public class ClienteRepo implements IRepository<Cliente> {
     public void guardar(Cliente t) throws SQLException {
         String sql = "";
         if (t.getId() != null && t.getId() > 0) {
-            sql = "UPDATE CLIENTES SET NOMBRE=?,AP_PATERNO=?, " +
-                    "AP_MATERNO=?,TELEFONO=?,CORREO=?,CALLE=?,NUMERO_INT=?, " +
-                    "NUMERO_EXT=?,COLONIA=?,CIUDAD=?,ESTADO=?,CODIGO_POSTAL=? " +
-                    "WHERE ID_CLIENTE=?";
+            sql = "UPDATE CLIENTES SET NOMBRE=?, AP_PATERNO=?, AP_MATERNO=?, TELEFONO=?, CORREO=?, " +
+                    "CALLE=?, NUMERO_INT=?, NUMERO_EXT=?, COLONIA=?, CIUDAD=?, ESTADO=?, CODIGO_POSTAL=?, " +
+                    "FECHA_NACIMIENTO=? WHERE ID_CLIENTE=?";
 
         } else {
-            sql = "INSERT INTO CLIENTES(ID_CLIENTE,NOMBRE,AP_PATERNO,AP_MATERNO,TELEFONO,CORREO,CALLE,NUMERO_INT,NUMERO_EXT,COLONIA,CIUDAD,ESTADO,CODIGO_POSTAL) "
+            sql = "INSERT INTO CLIENTES(ID_CLIENTE,NOMBRE,AP_PATERNO,AP_MATERNO,TELEFONO,CORREO,CALLE,NUMERO_INT,NUMERO_EXT,COLONIA,CIUDAD,ESTADO,CODIGO_POSTAL,FECHA_NACIMIENTO) "
                     +
-                    "VALUES(SEQUENCE_CLIENTE.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "VALUES(SEQUENCE_CLIENTE.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         }
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
-            stm.setString(1, t.getNombre());
-            stm.setString(2, t.getApPaterno());
-            stm.setString(3, t.getApMaterno());
-            stm.setString(4, t.getTelefono());
-            stm.setString(5, t.getCorreo());
-            stm.setString(6, t.getCalle());
-            stm.setLong(7, t.getNum_interior());
-            stm.setLong(8, t.getNum_exterior());
-            stm.setString(9, t.getColonia());
-            stm.setString(10, t.getCiudad());
-            stm.setString(11, t.getEstado().name().toString());
-            stm.setInt(12, t.getCp());
             if (t.getId() != null && t.getId() > 0) {
-                stm.setLong(13, t.getId());
+                stm.setString(1, t.getNombre());
+                stm.setString(2, t.getApPaterno());
+                stm.setString(3, t.getApMaterno());
+                stm.setString(4, t.getTelefono());
+                stm.setString(5, t.getCorreo());
+                stm.setString(6, t.getCalle());
+                stm.setLong(7, t.getNum_interior());
+                stm.setLong(8, t.getNum_exterior());
+                stm.setString(9, t.getColonia());
+                stm.setString(10, t.getCiudad());
+                stm.setString(11, t.getEstado().name().toString());
+                stm.setInt(12, t.getCp());
+                stm.setDate(13, Date.valueOf(t.getFecha_nacimiento()));
+                stm.setLong(14, t.getId());
+            } else {
+                stm.setString(1, t.getNombre());
+                stm.setString(2, t.getApPaterno());
+                stm.setString(3, t.getApMaterno());
+                stm.setString(4, t.getTelefono());
+                stm.setString(5, t.getCorreo());
+                stm.setString(6, t.getCalle());
+                stm.setLong(7, t.getNum_interior());
+                stm.setLong(8, t.getNum_exterior());
+                stm.setString(9, t.getColonia());
+                stm.setString(10, t.getCiudad());
+                stm.setString(11, t.getEstado().name().toString());
+                stm.setInt(12, t.getCp());
+                stm.setDate(13, Date.valueOf(t.getFecha_nacimiento()));
             }
+
             stm.executeUpdate();
         }
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE=?";
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
     }
 
     private Cliente getCliente(ResultSet rs) throws SQLException {
@@ -102,13 +123,13 @@ public class ClienteRepo implements IRepository<Cliente> {
         c.setTelefono(rs.getString("TELEFONO"));
         c.setCorreo(rs.getString("CORREO"));
         c.setCalle(rs.getString("CALLE"));
-        c.setNum_exterior(rs.getLong("NUMERO_INT"));
+        c.setNum_interior(rs.getLong("NUMERO_INT"));
         c.setNum_exterior(rs.getLong("NUMERO_EXT"));
         c.setColonia(rs.getString("COLONIA"));
         c.setCiudad(rs.getString("CIUDAD"));
         c.setEstado(EnumEstado.valueOf(rs.getString("ESTADO")));
         c.setCp(rs.getInt("CODIGO_POSTAL"));
-        c.setFecha_nacimiento(rs.getDate("FECHA_NACIMIENTO"));
+        c.setFecha_nacimiento(rs.getDate("FECHA_NACIMIENTO").toLocalDate());
         return c;
     }
 }

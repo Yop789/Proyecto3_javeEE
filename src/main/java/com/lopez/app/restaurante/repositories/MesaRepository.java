@@ -1,6 +1,7 @@
 package com.lopez.app.restaurante.repositories;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,20 +37,50 @@ public class MesaRepository implements IRepository<Mesa> {
 
     @Override
     public Mesa get(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        String sql = "SELECT * FROM MESAS WHERE ID_MESA=?";
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    return this.getMesa(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+
+        return null;
     }
 
     @Override
     public void guardar(Mesa t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+        String sql = "";
+        if (t.getId_mesa() != null && t.getId_mesa() > 0) {
+            sql = "UPDATE MESAS SET NUMERO=?,CAPACIDAD=?,LUGAR=?,ESTATUS=? WHERE ID_MESA=?";
+        } else {
+            sql = "INSERT INTO MESAS(ID_MESA,NUMERO,CAPACIDAD,LUGAR,ESTATUS) VALUES(SEQUENCE_MESAS.NEXTVAL,?,?,?,?)";
+        }
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, t.getNum_mesa());
+            stm.setLong(2, t.getCapacidad());
+            stm.setString(3, t.getLugar());
+            stm.setString(4, t.getEstado().toString());
+            if (t.getId_mesa() != null && t.getId_mesa() > 0) {
+                stm.setLong(5, t.getId_mesa());
+            }
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        String sql = "DELETE FROM MESAS WHERE ID_MESA=?";
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            stm.executeUpdate();
+        }
     }
 
     private Mesa getMesa(ResultSet rs) throws SQLException {

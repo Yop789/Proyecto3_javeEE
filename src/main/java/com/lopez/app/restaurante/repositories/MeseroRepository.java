@@ -68,7 +68,7 @@ public class MeseroRepository implements IRepository<Mesero> {
         mesero.setCiudad(rs.getString("CIUDAD"));
         mesero.setEstado(EnumEstado.valueOf(rs.getString("ESTADO")));
         mesero.setCp(rs.getInt("CODIGO_POSTAL"));
-        mesero.setFecha_nacimiento(rs.getDate("FECHA_NACIMIENTO"));
+        mesero.setFecha_nacimiento(rs.getDate("FECHA_NACIMIENTO").toLocalDate());
         mesero.setNum_Empleado(rs.getLong("NUM_EMPLEADO"));
         mesero.setEdad(rs.getLong("EDAD"));
         return mesero;

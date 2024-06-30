@@ -47,7 +47,11 @@ public class ClienteService implements IService<Cliente> {
 
     @Override
     public void eliminar(Long id) {
-
+        try {
+            clienteRepo.eliminar(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
 }

@@ -1,10 +1,14 @@
 package com.lopez.app.restaurante.repositories;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.lopez.app.restaurante.models.Reservacio;
@@ -37,20 +41,53 @@ public class ReservasRepository implements IRepository<Reservacio> {
 
     @Override
     public Reservacio get(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        String sql = "SELECT * FROM RESERVAS WHERE ID_RESERVA=?";
+        Reservacio reservacio = null;
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    reservacio = this.getReservacio(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+
+        return reservacio;
     }
 
     @Override
     public void guardar(Reservacio t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+        String sql = "";
+        if (t.getId() != null && t.getId() > 0) {
+            sql = "UPDATE RESERVAS SET ID_MESA=?,ID_CLIENTE=?,FECHA=?,FECHA_A_RESERVAR=?,ESTATUS=? WHERE ID_RESERVA=?";
+        } else {
+            sql = "INSERT INTO RESERVAS(ID_MESA,ID_CLIENTE,FECHA,FECHA_A_RESERVAR,ESTATUS) VALUES(?,?,?,?,?)";
+        }
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, t.getId_mesa());
+            stm.setLong(2, t.getId_cliente());
+            stm.setDate(3, Date.valueOf(t.getFecha()));
+            stm.setTimestamp(4, Timestamp.valueOf(t.getFecha_a_reservar()));
+            stm.setString(5, t.getEstatus());
+            if (t.getId() != null && t.getId() > 0) {
+                stm.setLong(6, t.getId());
+            }
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        String sql = "DELETE FROM RESERVAS WHERE ID_RESERVA=?";
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            stm.executeUpdate();
+        }
     }
 
     private Reservacio getReservacio(ResultSet rs) throws SQLException {
@@ -59,7 +96,7 @@ public class ReservasRepository implements IRepository<Reservacio> {
         reservacio.setId_mesa(rs.getLong("ID_MESA"));
         reservacio.setId_cliente(rs.getLong("ID_CLIENTE"));
         reservacio.setFecha(rs.getDate("FECHA").toLocalDate());
-        reservacio.setFecha_a_reservar(rs.getDate("FECHA_A_RESERVAR").toLocalDate());
+        reservacio.setFecha_a_reservar(rs.getTimestamp("FECHA_A_RESERVAR").toLocalDateTime());
         reservacio.setEstatus(rs.getString("ESTATUS"));
         return reservacio;
     }

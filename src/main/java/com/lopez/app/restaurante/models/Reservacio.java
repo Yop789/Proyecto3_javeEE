@@ -1,13 +1,14 @@
 package com.lopez.app.restaurante.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Reservacio {
     private Long id;
     private Long id_mesa;
     private Long id_cliente;
     private LocalDate fecha;
-    private LocalDate fecha_a_reservar;
+    private LocalDateTime fecha_a_reservar;
     private String estatus;
 
     public Long getId() {
@@ -42,11 +43,11 @@ public class Reservacio {
         this.fecha = fecha;
     }
 
-    public LocalDate getFecha_a_reservar() {
+    public LocalDateTime getFecha_a_reservar() {
         return fecha_a_reservar;
     }
 
-    public void setFecha_a_reservar(LocalDate fecha_a_reservar) {
+    public void setFecha_a_reservar(LocalDateTime fecha_a_reservar) {
         this.fecha_a_reservar = fecha_a_reservar;
     }
 
