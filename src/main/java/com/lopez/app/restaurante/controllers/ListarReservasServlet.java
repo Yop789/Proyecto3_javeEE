@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/reservas/listar")
+@WebServlet("/reservaciones/listar")
 public class ListarReservasServlet extends HttpServlet {
 
     @Override
@@ -22,12 +22,15 @@ public class ListarReservasServlet extends HttpServlet {
         Connection conn = (Connection) req.getAttribute("conn");
         IReservasService<Reservacio> mesaService = new ReservasService(conn);
 
-        List<Reservacio> mesas = mesaService.lista();
-        for (Reservacio mesa : mesas) {
-            resp.getWriter().println(
-                    "<h1>" + mesa.getId() + "->"
-                            + mesa.getFecha() + "->" + mesa.getFecha_a_reservar() + "</h1>");
-        }
+        List<Reservacio> reservaciones = mesaService.lista();
+        // for (Reservacio mesa : mesas) {
+        // resp.getWriter().println(
+        // "<h1>" + mesa.getId() + "->"
+        // + mesa.getFecha() + "->" + mesa.getFecha_a_reservar() + "</h1>");
+        // }
+
+        req.setAttribute("reservaciones", reservaciones);
+        getServletContext().getRequestDispatcher("/ListarRecervaciones.jsp").forward(req, resp);
     }
 
 }

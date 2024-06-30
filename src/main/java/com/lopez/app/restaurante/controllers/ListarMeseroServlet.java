@@ -25,11 +25,14 @@ public class ListarMeseroServlet extends HttpServlet {
         IService<Mesero> meseroService = new MeseroService(conn);
         List<Mesero> meseros = meseroService.lista();
 
-        for (Mesero mesero : meseros) {
-            resp.getWriter().println(
-                    "<h1>" + mesero.getId() + "->"
-                            + mesero.getNombre() + "->" + mesero.getApPaterno() + "</h1>");
-        }
+        // for (Mesero mesero : meseros) {
+        // resp.getWriter().println(
+        // "<h1>" + mesero.getId() + "->"
+        // + mesero.getNombre() + "->" + mesero.getApPaterno() + "</h1>");
+        // }
+
+        req.setAttribute("meseros", meseros);
+        getServletContext().getRequestDispatcher("/ListarMeseros.jsp").forward(req, resp);
     }
 
 }

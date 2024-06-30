@@ -23,11 +23,13 @@ public class ListarMesaServlet extends HttpServlet {
         IService<Mesa> mesaService = new MesaService(conn);
 
         List<Mesa> mesas = mesaService.lista();
-        for (Mesa mesa : mesas) {
-            resp.getWriter().println(
-                    "<h1>" + mesa.getId_mesa() + "->"
-                            + mesa.getNum_mesa() + "->" + mesa.getCapacidad() + "</h1>");
-        }
+        // for (Mesa mesa : mesas) {
+        // resp.getWriter().println(
+        // "<h1>" + mesa.getId_mesa() + "->"
+        // + mesa.getNum_mesa() + "->" + mesa.getCapacidad() + "</h1>");
+        // }
+        req.setAttribute("mesas", mesas);
+        getServletContext().getRequestDispatcher("/ListarMesas.jsp").forward(req, resp);
     }
 
 }
