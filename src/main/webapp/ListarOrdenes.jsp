@@ -43,8 +43,6 @@ List<Ordenar> ordenes = (List<Ordenar>) request.getAttribute("ordenes");
                             <th>Num. Mesas</th>
                             <th>Num. Cliente</th>
                             <th>Fecha</th>
-                            <th>Fecha a Reservar</th>
-                            <th>Estado</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -55,10 +53,8 @@ List<Ordenar> ordenes = (List<Ordenar>) request.getAttribute("ordenes");
                         <tr>
                             <td><%= r.getId() %></td>
                             <td><%= r.getId_mesa() %></td>
-                            <td><%= r.getId_cliente() %></td>
+                            <td><%= r.getId_mesero() %></td>
                             <td><%= r.getFecha() %></td>
-                            <td><%= r.getFecha_a_reservar() %></td>
-                            <td><%= r.getEstatus() %></td>
                             <td>
                                 <a href="<%= request.getContextPath() %>/Ordenesnes/detalle?id=<%= r.getId() %>" class="btn btn-success">Detalle</a>
                             </td>

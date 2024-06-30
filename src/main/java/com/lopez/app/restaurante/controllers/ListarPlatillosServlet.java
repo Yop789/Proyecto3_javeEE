@@ -24,12 +24,16 @@ public class ListarPlatillosServlet extends HttpServlet {
 
         IService<Platillo> platilloService = new PlatilloService(conn);
 
-        List<Platillo> platillos = platilloService.lista();
-        for (Platillo platillo : platillos) {
-            resp.getWriter().println(
-                    "<h1>" + platillo.getId() + "->"
-                            + platillo.getNombre() + "->" + platillo.getPrecio() + "</h1>");
-        }
+        // List<Platillo> platillos = platilloService.lista();
+        // for (Platillo platillo : platillos) {
+        // resp.getWriter().println(
+        // "<h1>" + platillo.getId() + "->"
+        // + platillo.getNombre() + "->" + platillo.getPrecio() + "</h1>");
+        // }
+
+        req.setAttribute("platillos", platilloService.lista());
+
+        getServletContext().getRequestDispatcher("/ListarPlatillos.jsp").forward(req, resp);
 
     }
 

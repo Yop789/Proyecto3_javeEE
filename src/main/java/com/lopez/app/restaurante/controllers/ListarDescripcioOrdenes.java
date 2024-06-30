@@ -24,11 +24,15 @@ public class ListarDescripcioOrdenes extends HttpServlet {
 
         IDescripcioOrdenService<DescripcioOrden> descripcioOrdenService = new DescripcioService(conn);
         List<DescripcioOrden> descripciones = descripcioOrdenService.lista();
-        for (DescripcioOrden descripcio : descripciones) {
-            resp.getWriter().println(
-                    "<h1>" + descripcio.getId() + "->"
-                            + descripcio.getId_platillo() + "->" + descripcio.getId_orden() + "</h1>");
-        }
+        // for (DescripcioOrden descripcio : descripciones) {
+        // resp.getWriter().println(
+        // "<h1>" + descripcio.getId() + "->"
+        // + descripcio.getId_platillo() + "->" + descripcio.getId_orden() + "</h1>");
+        // }
+
+        req.setAttribute("descripciones", descripciones);
+
+        getServletContext().getRequestDispatcher("/ListarDescripciones.jsp").forward(req, resp);
     }
 
 }

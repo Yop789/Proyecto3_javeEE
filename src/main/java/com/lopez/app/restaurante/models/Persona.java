@@ -17,6 +17,8 @@ public class Persona {
     private Date fecha_nacimiento;
     private String colonia;
     private String ciudad;
+    private Integer cp;
+    private EnumEstado estado;
 
     public Date getFecha_nacimiento() {
         return fecha_nacimiento;
@@ -25,9 +27,6 @@ public class Persona {
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
-
-    private Integer cp;
-    private EnumEstado estado;
 
     public String getNombre() {
         return nombre;

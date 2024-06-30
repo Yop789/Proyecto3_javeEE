@@ -173,12 +173,12 @@
               ></a>
               <ul class="dropdown-menu">
               <li>
-                  <a href="<%=request.getContextPath()%>/detalladoordenes/listar"
+                  <a href="<%=request.getContextPath()%>/descripciones/listar"
                     >Listado de Detallado de ordenes</a
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/detalladoordenes/Alta"
+                  <a href="<%=request.getContextPath()%>/descripciones/Alta"
                     >Detallar una Orden</a
                   >
                 </li>
