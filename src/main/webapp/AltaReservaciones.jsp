@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.lopez.app.restaurante.models.*" %>
+<%@ page import="com.lopez.app.restaurante.models.Enum.*" %> 
 
 <%
 List<Mesa> mesas = (List<Mesa>) request.getAttribute("mesas");
@@ -58,7 +59,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                         <select id="id_cliente" name="id_cliente" class="form-control">
                             <option value="">---Seleccione un cliente---</option>
                             <% for (Cliente cliente : clientes) { %>
-                                <option value="<%= cliente.getId_cliente() %>"><%= cliente.getNombre() %> <%= cliente.getApPaterno() %></option>
+                                <option value="<%= cliente.getId() %>"><%= cliente.getNombre() %> <%= cliente.getApPaterno() %> <%= cliente.getApMaterno() %></option>
                             <% } %>
                         </select>
                         <% if (errors != null && errors.containsKey("id_cliente")) { %>
@@ -73,9 +74,31 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                             <span class="text-danger"><%= errors.get("fecha_a_reservar") %></span>
                         <% } %>
                     </div>
+                    <div class="form-group">
+                    <label for="estatus">Estado de la Mesa</label>
+                    <select
+                        id="estatus"
+                        name="estatus"
+                        class="form-control"
+                        aria-label="Default select example"
+                    >
+                        <option value="">---Selecciona el estado---</option>
+                        <% for (EnumReservacion estado : EnumReservacion.values()) { %>
+                        <option value="<%= estado %>" <%= estado.name().equals(request.getParameter("estatus")) ? "selected" : "" %>><%= estado %></option>
+                        <% } %>
+                    </select>
+                    <% if (errors != null && errors.containsKey("estatus")) { %>
+                        <span class="text-danger"><%= errors.get("estatus") %></span>
+                    <% } %>
+                    </div>
+                    <%-- <div class="form-group">
+                        <label for="estatus">Estatus</label>
+                        <input type="text" id="estatus" name="estatus" class="form-control">
+                    </div> --%>
+                    
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Guardar Reservación</button>
+                        <button type="submit" class="btn btn-success">Guardar Reservación</button>
                         <a href="<%= request.getContextPath() %>/reservaciones/listar" class="btn btn-secondary">Cancelar</a>
                     </div>
                 </div>

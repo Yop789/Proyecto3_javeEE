@@ -69,7 +69,7 @@ public class EditarClienteServlet extends HttpServlet {
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         Map<String, String> errors = new HashMap<>();
-        IService service = new ClienteService(conn);
+        IService<Cliente> service = new ClienteService(conn);
 
         String nombre = req.getParameter("nombre");
         String apPaterno = req.getParameter("apPaterno");

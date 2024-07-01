@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.lopez.app.restaurante.models.Cliente;
 import com.lopez.app.restaurante.models.Mesa;
-import com.lopez.app.restaurante.service.ClienteService;
 import com.lopez.app.restaurante.service.IService;
 import com.lopez.app.restaurante.service.MesaService;
 

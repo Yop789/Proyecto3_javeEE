@@ -90,6 +90,13 @@ public class AltaClienteServlet extends HttpServlet {
             errors.put("calle", "La calle es requerida");
         }
 
+        if (numInteriorParam != null && !numInteriorParam.isEmpty()) {
+            try {
+                num_interno = Long.parseLong(numInteriorParam);
+            } catch (NumberFormatException e) {
+                errors.put("num_interno", "El número interno debe ser un número válido");
+            }
+        }
         if (numExteriorParam == null || numExteriorParam.isEmpty()) {
             errors.put("numExterior", "El número externo es requerido");
         } else {

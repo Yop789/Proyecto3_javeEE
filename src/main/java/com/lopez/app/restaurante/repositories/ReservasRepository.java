@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lopez.app.restaurante.models.Reservacio;
+import com.lopez.app.restaurante.models.Enum.EnumReservacion;
 
 public class ReservasRepository implements IRepository<Reservacio> {
     private Connection conn;
@@ -63,14 +64,15 @@ public class ReservasRepository implements IRepository<Reservacio> {
         if (t.getId() != null && t.getId() > 0) {
             sql = "UPDATE RESERVAS SET ID_MESA=?,ID_CLIENTE=?,FECHA=?,FECHA_A_RESERVAR=?,ESTATUS=? WHERE ID_RESERVA=?";
         } else {
-            sql = "INSERT INTO RESERVAS(ID_MESA,ID_CLIENTE,FECHA,FECHA_A_RESERVAR,ESTATUS) VALUES(?,?,?,?,?)";
+            sql = "INSERT INTO RESERVAS(ID_RESERVA,ID_CLIENTE,ID_MESA,FECHA,FECHA_A_RESERVAR,ESTATUS) VALUES(SEQUENCE_RESERVAS.NEXTVAL,?,?,?,?,?)";
         }
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
-            stm.setLong(1, t.getId_mesa());
-            stm.setLong(2, t.getId_cliente());
+
+            stm.setLong(1, t.getId_cliente());
+            stm.setLong(2, t.getId_mesa());
             stm.setDate(3, Date.valueOf(t.getFecha()));
             stm.setTimestamp(4, Timestamp.valueOf(t.getFecha_a_reservar()));
-            stm.setString(5, t.getEstatus());
+            stm.setString(5, t.getEstatus().toString());
             if (t.getId() != null && t.getId() > 0) {
                 stm.setLong(6, t.getId());
             }
@@ -97,7 +99,7 @@ public class ReservasRepository implements IRepository<Reservacio> {
         reservacio.setId_cliente(rs.getLong("ID_CLIENTE"));
         reservacio.setFecha(rs.getDate("FECHA").toLocalDate());
         reservacio.setFecha_a_reservar(rs.getTimestamp("FECHA_A_RESERVAR").toLocalDateTime());
-        reservacio.setEstatus(rs.getString("ESTATUS"));
+        reservacio.setEstatus(EnumReservacion.valueOf(rs.getString("ESTATUS")));
         return reservacio;
     }
 

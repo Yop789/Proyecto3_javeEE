@@ -3,13 +3,15 @@ package com.lopez.app.restaurante.models;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.lopez.app.restaurante.models.Enum.EnumReservacion;
+
 public class Reservacio {
     private Long id;
     private Long id_mesa;
     private Long id_cliente;
     private LocalDate fecha;
     private LocalDateTime fecha_a_reservar;
-    private String estatus;
+    private EnumReservacion estatus;
 
     public Long getId() {
         return id;
@@ -51,11 +53,11 @@ public class Reservacio {
         this.fecha_a_reservar = fecha_a_reservar;
     }
 
-    public String getEstatus() {
+    public EnumReservacion getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(String estatus) {
+    public void setEstatus(EnumReservacion estatus) {
         this.estatus = estatus;
     }
 

@@ -5,6 +5,7 @@
 <%
 // Recuperamos la lista de clientes que seteamos en el request desde el servlet
 List<Reservacio> reservaciones = (List<Reservacio>) request.getAttribute("reservaciones");
+Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
 <!DOCTYPE html>
@@ -28,6 +29,14 @@ List<Reservacio> reservaciones = (List<Reservacio>) request.getAttribute("reserv
         <div class="col-md-6">
             <h2>Listado de reservaciones</h2>
         </div>
+        <br>
+        <% if (errors != null && !errors.isEmpty()) { %>
+        <ul class="alert alert-danger mx-5 px-5">
+            <% for (String e : errors.values()) { %>
+            <li><%= e %></li>
+            <% } %>
+        </ul>
+        <% } %>
         <div class="col-md-6 text-right">
             <a href="<%= request.getContextPath() %>/reservaciones/alta" class="btn btn-success">Alta de Reservacio</a>
         </div>
