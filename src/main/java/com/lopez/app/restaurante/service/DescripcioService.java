@@ -1,6 +1,7 @@
 package com.lopez.app.restaurante.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +35,12 @@ public class DescripcioService implements IDescripcioOrdenService<DescripcioOrde
 
     @Override
     public Optional<DescripcioOrden> getByID(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByID'");
+
+        try {
+            return Optional.ofNullable(descripcioRepo.get(id));
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override

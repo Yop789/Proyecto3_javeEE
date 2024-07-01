@@ -36,14 +36,23 @@ public class DescripcioOrdenRepository implements IRepository<DescripcioOrden> {
 
     @Override
     public DescripcioOrden get(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        String sql = "SELECT * FROM DETALLE_PEDIDO WHERE ID_DETALLEP = " + id;
+        try (Statement stm = this.conn.createStatement();
+                ResultSet rs = stm.executeQuery(sql)) {
+            if (rs.next()) {
+                return this.getDescripcio(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+
+        return null;
     }
 
     @Override
     public void guardar(DescripcioOrden t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+
     }
 
     @Override
