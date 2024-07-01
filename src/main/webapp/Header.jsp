@@ -109,7 +109,7 @@
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/meseros/Alta"
+                  <a href="<%=request.getContextPath()%>/meseros/alta"
                     >Alta de Mesero</a
                   >
                 </li>

@@ -5,6 +5,7 @@
 <%
 // Recuperamos la lista de clientes que seteamos en el request desde el servlet
 List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
+Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
 <!DOCTYPE html>
@@ -31,6 +32,14 @@ List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
         <div class="col-md-6 text-right">
             <a href="<%= request.getContextPath() %>/meseros/alta" class="btn btn-success">Alta de Mesero</a>
         </div>
+        <br>
+        <% if (errors != null && !errors.isEmpty()) { %>
+        <ul class="alert alert-danger mx-5 px-5">
+            <% for (String e : errors.values()) { %>
+            <li><%= e %></li>
+            <% } %>
+        </ul>
+        <% } %>
     </div>
 
     <div class="row">
@@ -39,6 +48,7 @@ List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Num. Mesero</th>
                             <th>Nombre</th>
                             <th>Apellido Paterno</th>
@@ -53,6 +63,7 @@ List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
                     <tbody>
                         <% for (Mesero m: meseros) { %>
                         <tr>
+                            <td><%= m.getId() %></td>
                             <td><%= m.getNum_Empleado() %></td>
                             <td><%= m.getNombre() %></td>
                             <td><%= m.getApPaterno() %></td>
@@ -60,13 +71,13 @@ List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
                             <td><%= m.getEdad() %></td>
                             <td><%= m.getFecha_nacimiento() %></td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/reservaciones/detalle?id=<%= m.getId() %>" class="btn btn-success">Detalle</a>
+                                <a href="<%= request.getContextPath() %>/meseros/detalle?id=<%= m.getId() %>" class="btn btn-success">Detalle</a>
                             </td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/reservaciones/editar?id=<%= m.getId() %>" class="btn btn-primary">Editar</a>
+                                <a href="<%= request.getContextPath() %>/meseros/editar?id=<%= m.getId() %>" class="btn btn-primary">Editar</a>
                             </td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/reservaciones/eliminar?id=<%= m.getId() %>" class="btn btn-danger">Eliminar</a>
+                                <a href="<%= request.getContextPath() %>/meseros/eliminar?id=<%= m.getId() %>" class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                         <% } %>
