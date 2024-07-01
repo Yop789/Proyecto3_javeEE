@@ -1,9 +1,11 @@
 package com.lopez.app.restaurante.repositories;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,20 +36,48 @@ public class OrdenRepository implements IRepository<Ordenar> {
 
     @Override
     public Ordenar get(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        String sql = "SELECT * FROM PEDIDOS WHERE ID_PEDIDO = " + id;
+
+        try (Statement stm = conn.createStatement();
+                ResultSet rs = stm.executeQuery(sql)) {
+            if (rs.next()) {
+                return this.getOrden(rs);
+            }
+        }
+
+        return null;
     }
 
     @Override
     public void guardar(Ordenar t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+        String sql = "";
+
+        if (t.getId() != null && t.getId() > 0) {
+            sql = "UPDATE PEDIDOS SET ID_MESA=?,ID_MESERO=?,FECHA=? WHERE ID_PEDIDO=?";
+        } else {
+            sql = "INSERT INTO PEDIDOS(ID_PEDIDO,ID_MESA,ID_MESERO,FECHA) VALUES(SEQUENCE_PEDIDOS.NEXTVAL,?,?,?)";
+        }
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+
+            stm.setLong(1, t.getId_mesa());
+            stm.setLong(2, t.getId_mesero());
+            stm.setTimestamp(3, Timestamp.valueOf(t.getFecha()));
+            if (t.getId() != null && t.getId() > 0) {
+                stm.setLong(4, t.getId());
+            }
+            stm.executeUpdate();
+        }
+
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+
+        String sql = "DELETE FROM PEDIDOS WHERE ID_PEDIDO = " + id;
+        try (PreparedStatement stm = conn.prepareStatement(sql)) {
+
+            stm.executeUpdate();
+        }
     }
 
     private Ordenar getOrden(ResultSet rs) throws SQLException {
@@ -55,7 +85,7 @@ public class OrdenRepository implements IRepository<Ordenar> {
         orden.setId(rs.getLong("ID_PEDIDO"));
         orden.setId_mesa(rs.getLong("ID_MESA"));
         orden.setId_mesero(rs.getLong("ID_MESERO"));
-        orden.setFecha(rs.getDate("FECHA").toLocalDate());
+        orden.setFecha(rs.getTimestamp("FECHA").toLocalDateTime());
         return orden;
     }
 

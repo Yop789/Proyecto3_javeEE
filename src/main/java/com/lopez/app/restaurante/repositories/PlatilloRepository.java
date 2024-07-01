@@ -1,6 +1,7 @@
 package com.lopez.app.restaurante.repositories;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,20 +35,49 @@ public class PlatilloRepository implements IRepository<Platillo> {
 
     @Override
     public Platillo get(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        String sql = "SELECT * FROM PLATILLOS WHERE ID_PLATILLO = " + id;
+        try (Statement stm = this.conn.createStatement();
+                ResultSet rs = stm.executeQuery(sql)) {
+            if (rs.next()) {
+                return this.getPlatillo(rs);
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+        return null;
     }
 
     @Override
     public void guardar(Platillo t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+
+        String sql = "";
+        if (t.getId() != null && t.getId() > 0) {
+            sql = "UPDATE PLATILLOS SET NOMBRE=?,DESCRIPCION=?,PRECIO=?,ESTATUS=? WHERE ID_PLATILLO=?";
+        } else {
+            sql = "INSERT INTO PLATILLOS(ID_PLATILLO,NOMBRE,DESCRIPCION,PRECIO,ESTATUS) VALUES(SEQUENCE_PLATILLOS.NEXTVAL,?,?,?,?)";
+        }
+        try (PreparedStatement stm = this.conn.prepareStatement(sql)) {
+            stm.setString(1, t.getNombre());
+            stm.setString(2, t.getDescripcion());
+            stm.setFloat(3, t.getPrecio());
+            stm.setString(4, t.getEstatus().toString());
+            if (t.getId() != null && t.getId() > 0) {
+                stm.setLong(5, t.getId());
+            }
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException(e);
+
+        }
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        String sql = "DELETE FROM PLATILLOS WHERE ID_PLATILLO=?";
+        try (PreparedStatement stm = this.conn.prepareStatement(sql)) {
+            stm.setLong(1, id);
+            stm.executeUpdate();
+        }
     }
 
     private Platillo getPlatillo(ResultSet rs) throws SQLException {

@@ -85,7 +85,7 @@
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/reservaciones/Alta"
+                  <a href="<%=request.getContextPath()%>/reservaciones/alta"
                     >Alta de Reservaciones</a
                   >
                 </li>
@@ -132,7 +132,7 @@
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/platillos/Alta"
+                  <a href="<%=request.getContextPath()%>/platillos/alta"
                     >Alta de Platillo</a
                   >
                 </li>
@@ -155,7 +155,7 @@
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/ordenes/Alta"
+                  <a href="<%=request.getContextPath()%>/ordenes/alta"
                     >Alta de orden</a
                   >
                 </li>
@@ -178,7 +178,7 @@
                   >
                 </li>
                 <li>
-                  <a href="<%=request.getContextPath()%>/descripciones/Alta"
+                  <a href="<%=request.getContextPath()%>/descripciones/alta"
                     >Detallar una Orden</a
                   >
                 </li>

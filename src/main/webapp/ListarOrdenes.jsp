@@ -5,6 +5,7 @@
 <%
 // Recuperamos la lista de clientes que seteamos en el request desde el servlet
 List<Ordenar> ordenes = (List<Ordenar>) request.getAttribute("ordenes");
+Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
 <!DOCTYPE html>
@@ -31,6 +32,14 @@ List<Ordenar> ordenes = (List<Ordenar>) request.getAttribute("ordenes");
         <div class="col-md-6 text-right">
             <a href="<%= request.getContextPath() %>/ordenes/alta" class="btn btn-success">Alta de Ordenes</a>
         </div>
+        <br>
+        <% if (errors != null && !errors.isEmpty()) { %>
+        <ul class="alert alert-danger mx-5 px-5">
+            <% for (String e : errors.values()) { %>
+            <li><%= e %></li>
+            <% } %>
+        </ul>
+        <% } %>
     </div>
 
     <div class="row">
@@ -56,13 +65,13 @@ List<Ordenar> ordenes = (List<Ordenar>) request.getAttribute("ordenes");
                             <td><%= r.getId_mesero() %></td>
                             <td><%= r.getFecha() %></td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/Ordenesnes/detalle?id=<%= r.getId() %>" class="btn btn-success">Detalle</a>
+                                <a href="<%= request.getContextPath() %>/ordenes/detalle?id=<%= r.getId() %>" class="btn btn-success">Detalle</a>
                             </td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/Ordenesnes/editar?id=<%= r.getId() %>" class="btn btn-primary">Editar</a>
+                                <a href="<%= request.getContextPath() %>/ordenes/editar?id=<%= r.getId() %>" class="btn btn-primary">Editar</a>
                             </td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/Ordenesnes/eliminar?id=<%= r.getId() %>" class="btn btn-danger">Eliminar</a>
+                                <a href="<%= request.getContextPath() %>/ordenes/eliminar?id=<%= r.getId() %>" class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                         <% } %>

@@ -34,20 +34,32 @@ public class OrdenarService implements IOrdenarService<Ordenar> {
 
     @Override
     public Optional<Ordenar> getByID(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByID'");
+        Optional<Ordenar> optional = null;
+        try {
+            optional = Optional.ofNullable(ordenarRepo.get(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+
+        return optional;
     }
 
     @Override
     public void guardar(Ordenar t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+        try {
+            ordenarRepo.guardar(t);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
     public void eliminar(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        try {
+            ordenarRepo.eliminar(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
