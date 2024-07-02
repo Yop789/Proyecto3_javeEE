@@ -142,7 +142,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                 // Realizar la llamada AJAX
                 $.ajax({
                     type: 'POST',
-                    url: '<%= request.getContextPath() %>/api/ordenes', // URL de tu API REST para crear órdenes
+                    url: 'http://localhost:8080/ApiRestaurante/descripciones/alta', // URL de tu API REST para crear órdenes
                     contentType: 'application/json',
                     data: JSON.stringify(ordenData),
                     success: function(response) {
