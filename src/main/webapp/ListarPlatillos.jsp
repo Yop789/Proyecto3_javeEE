@@ -27,7 +27,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h2>Listado de Meseros</h2>
+            <h2>Listado de Platillo</h2>
         </div>
         <div class="col-md-6 text-right">
             <a href="<%= request.getContextPath() %>/platillos/alta" class="btn btn-success">Alta de Mesero</a>

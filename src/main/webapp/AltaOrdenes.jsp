@@ -4,8 +4,8 @@
 <%@ page import="com.lopez.app.restaurante.models.Enum.*" %> 
 
 <%
-List<Mesa> mesas = (List<Mesa>) request.getAttribute("mesas");
-List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
+List<Platillo> platillo = (List<Platillo>) request.getAttribute("platillos");
+List<Ordenar> ordenars = (List<Ordenar>) request.getAttribute("ordenars");
 Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
@@ -14,7 +14,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alta de Reservación</title>
+    <title>Alta de Descripciones Orden</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -25,7 +25,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Alta de Reservación</h2>
+                <h2>Alta de Descripciones Orden</h2>
             </div>
         </div>
 

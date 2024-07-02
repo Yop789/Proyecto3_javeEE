@@ -44,9 +44,7 @@ List<DescripcioOrden> descripciones = (List<DescripcioOrden>) request.getAttribu
                             <th>Platillo</th>
                             <th>Cantidad</th>
                             <th>Estado</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -57,15 +55,6 @@ List<DescripcioOrden> descripciones = (List<DescripcioOrden>) request.getAttribu
                             <td><%= r.getId_platillo() %></td>
                             <td><%= r.getCantidad() %></td>
                             <td><%= r.getEstatus() %></td>
-                            <td>
-                                <a href="<%= request.getContextPath() %>/descripciones/detalles?id=<%= r.getId() %>" class="btn btn-success">Detalle</a>
-                            </td>
-                            <td>
-                                <a href="<%= request.getContextPath() %>/descripciones/detalles?id=<%= r.getId() %>" class="btn btn-primary">Editar</a>
-                            </td>
-                            <td>
-                                <a href="<%= request.getContextPath() %>/descripciones/detalles?id=<%= r.getId() %>" class="btn btn-danger">Eliminar</a>
-                            </td>
                         </tr>
                         <% } %>
                     </tbody>

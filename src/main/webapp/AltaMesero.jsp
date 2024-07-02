@@ -228,7 +228,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
             <div class="form-group">
                 <label for="num_Empleado">Número de Empleado</label>
                 <input
-                    type="text"
+                    type="number"
                     id="num_Empleado"
                     name="num_Empleado"
                     class="form-control"

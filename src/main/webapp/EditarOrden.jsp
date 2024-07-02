@@ -73,7 +73,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
 
                 <div class="form-group">
                     <label for="fecha">Fecha</label>
-                    <input type="text"  id="fecha" name="fecha"  class="form-control"
+                    <input type="datetime-local"  id="fecha" name="fecha"  class="form-control"
                         value="<%= orden.getFecha() %>" >
                     
                     <% if (errors != null && errors.containsKey("fecha")) { %>

@@ -6,13 +6,10 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-import com.lopez.app.restaurante.models.Cliente;
 import com.lopez.app.restaurante.models.Mesa;
 import com.lopez.app.restaurante.models.Mesero;
 import com.lopez.app.restaurante.models.Ordenar;
-import com.lopez.app.restaurante.service.ClienteService;
 import com.lopez.app.restaurante.service.IOrdenarService;
 import com.lopez.app.restaurante.service.IService;
 import com.lopez.app.restaurante.service.MesaService;
