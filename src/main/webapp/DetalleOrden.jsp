@@ -1,9 +1,8 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %> 
-<%@ page import="java.util.*" %> 
-<%@ page import="com.lopez.app.restaurante.models.Ordenar" %> 
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="com.lopez.app.restaurante.models.OrdenMeseroMesa" %>
 
 <%
-Ordenar orden = (Ordenar) request.getAttribute("orden");
+OrdenMeseroMesa orden = (OrdenMeseroMesa) request.getAttribute("orden");
 %>
 
 <!DOCTYPE html>
@@ -31,21 +30,29 @@ Ordenar orden = (Ordenar) request.getAttribute("orden");
                 <table class="table table-bordered">
                     <tr>
                         <th>ID de Orden</th>
-                        <td><%= orden.getId() %></td>
+                        <td><%= orden.getOrdenar().getId() %></td>
                     </tr>
                     <tr>
-                        <th>ID de Mesa</th>
-                        <td><%= orden.getId_mesa() %></td>
+                        <th>Mesa</th>
+                        <td>ID Mesa: <%= orden.getMesa().getId_mesa() %> <br>
+                            Número de Mesa: <%= orden.getMesa().getNum_mesa() %> <br>
+                            Capacidad: <%= orden.getMesa().getCapacidad() %> <br>
+                            Lugar: <%= orden.getMesa().getLugar() %> <br>
+                        </td>
                     </tr>
                     <tr>
-                        <th>ID de Mesero</th>
-                        <td><%= orden.getId_mesero() %></td>
+                        <th>Mesero</th>
+                        <td>
+                            ID Mesero: <%= orden.getMesero().getId() %> <br>
+                            Nombre: <%= orden.getMesero().getNombre() %> <%= orden.getMesero().getApPaterno() %> <%= orden.getMesero().getApMaterno() %> <br>
+                            Número de Empleado: <%= orden.getMesero().getNum_Empleado() %> <br>
+                            Edad: <%= orden.getMesero().getEdad() %> <br>
+                        </td>
                     </tr>
                     <tr>
                         <th>Fecha de Orden</th>
-                        <td><%= orden.getFecha() %></td>
+                        <td><%= orden.getOrdenar().getFecha() %></td>
                     </tr>
-                    <!-- Puedes agregar más detalles según la estructura de tu objeto Ordenar -->
                 </table>
                 <a href="<%= request.getContextPath() %>/ordenes/listar" class="btn btn-secondary">Volver</a>
             </div>

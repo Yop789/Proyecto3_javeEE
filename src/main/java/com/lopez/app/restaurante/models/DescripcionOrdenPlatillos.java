@@ -4,9 +4,27 @@ public class DescripcionOrdenPlatillos {
     Platillo platillo;
     Ordenar orden;
     DescripcioOrden descripcio;
+    Mesa mesa;
+    Mesero mesero;
 
     public Platillo getPlatillo() {
         return platillo;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public Mesero getMesero() {
+        return mesero;
+    }
+
+    public void setMesero(Mesero mesero) {
+        this.mesero = mesero;
     }
 
     public void setPlatillo(Platillo platillo) {

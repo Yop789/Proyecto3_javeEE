@@ -11,7 +11,7 @@ DescripcionOrdenPlatillos descripcioOrden = (DescripcionOrdenPlatillos) request.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle de Descripcion de Orden</title>
+    <title>Detalle de Descripcion dedescripcioOrden.getOrden()</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -29,7 +29,7 @@ DescripcionOrdenPlatillos descripcioOrden = (DescripcionOrdenPlatillos) request.
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Detalle de Descripcion de orden</h2>
+                <h2>Detalle de Descripcion de Oreden</h2>
             </div>
         </div>
         <br>
@@ -37,7 +37,7 @@ DescripcionOrdenPlatillos descripcioOrden = (DescripcionOrdenPlatillos) request.
             <div class="col-md-6">
                 <table class="table table-bordered">
                     <tr>
-                        <th>ID Orden</th>
+                        <th>Identificador de Orden </th>
                         <td><%= descripcioOrden.getOrden().getId() %></td>
                     </tr>
                     <tr>
@@ -51,16 +51,32 @@ DescripcionOrdenPlatillos descripcioOrden = (DescripcionOrdenPlatillos) request.
                         </td>
                     </tr>
                     <tr>
-                        <th>Orden</th>
-                        <td>ID Orden: <%= descripcioOrden.getOrden().getId() %> <br>
-                            ID Mesa:  <%= descripcioOrden.getOrden().getId_mesa() %> <br>
-                            ID Mesero: <%= descripcioOrden. getOrden().getId_mesero() %> <br>
-                            Fecha: <%= descripcioOrden. getOrden().getFecha() %> <br>
+                        <th>Mesa</th>
+                        <td>ID Mesa: <%=descripcioOrden.getMesa().getId_mesa() %> <br>
+                            Número de Mesa: <%=descripcioOrden.getMesa().getNum_mesa() %> <br>
+                            Capacidad: <%=descripcioOrden.getMesa().getCapacidad() %> <br>
+                            Lugar: <%=descripcioOrden.getMesa().getLugar() %> <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Mesero</th>
+                        <td>
+                            ID Mesero: <%=descripcioOrden.getMesero().getId() %> <br>
+                            Nombre: <%=descripcioOrden.getMesero().getNombre() %> <%=descripcioOrden.getMesero().getApPaterno() %> <%=descripcioOrden.getMesero().getApMaterno() %> <br>
+                            Número de Empleado: <%=descripcioOrden.getMesero().getNum_Empleado() %> <br>
+                            Edad: <%=descripcioOrden.getMesero().getEdad() %> <br>
+                        </td>
+                    </tr>
+                    
                             
                     </tr>
                     <tr>
                         <th>Fecha de Reservación</th>
                         <td><%= descripcioOrden.getOrden().getFecha() %></td>
+                    </tr>
+                    <tr>
+                        <th>Cantidad</th>
+                        <td><%= descripcioOrden.getDescripcio().getCantidad() %></td>
                     </tr>
                 </table>
                 <a href="<%= request.getContextPath() %>/descripciones/listar" class="btn btn-secondary">Volver</a>

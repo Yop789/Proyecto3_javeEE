@@ -6,12 +6,16 @@ import java.util.Optional;
 
 import com.lopez.app.restaurante.models.DescripcioOrden;
 import com.lopez.app.restaurante.models.DescripcionOrdenPlatillos;
+import com.lopez.app.restaurante.models.Mesa;
+import com.lopez.app.restaurante.models.Mesero;
 import com.lopez.app.restaurante.models.Ordenar;
 import com.lopez.app.restaurante.models.Platillo;
 import com.lopez.app.restaurante.service.DescripcioService;
 import com.lopez.app.restaurante.service.IDescripcioOrdenService;
 import com.lopez.app.restaurante.service.IOrdenarService;
 import com.lopez.app.restaurante.service.IService;
+import com.lopez.app.restaurante.service.MesaService;
+import com.lopez.app.restaurante.service.MeseroService;
 import com.lopez.app.restaurante.service.OrdenarService;
 import com.lopez.app.restaurante.service.PlatilloService;
 
@@ -39,11 +43,21 @@ public class DetalleDescripcioOrdenServlet extends HttpServlet {
         Long id_Platillo = descripcio.get().getId_platillo();
         Optional<Platillo> platillo = platilloService.getByID(id_Platillo);
 
+        IService<Mesero> meseroService = new MeseroService(conn);
+        Long id_mesero = orden.get().getId_mesero();
+        Optional<Mesero> mesero = meseroService.getByID(id_mesero);
+
+        IService<Mesa> mesaService = new MesaService(conn);
+        Long id_mesa = orden.get().getId_mesa();
+        Optional<Mesa> mesa = mesaService.getByID(id_mesa);
+
         DescripcionOrdenPlatillos desOrden = new DescripcionOrdenPlatillos();
 
         desOrden.setDescripcio(descripcio.get());
         desOrden.setOrden(orden.get());
         desOrden.setPlatillo(platillo.get());
+        desOrden.setMesero(mesero.get());
+        desOrden.setMesa(mesa.get());
         req.setAttribute("desOrden", desOrden);
         getServletContext().getRequestDispatcher("/DetalleDescripciones.jsp").forward(req, resp);
     }

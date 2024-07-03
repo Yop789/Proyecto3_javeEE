@@ -4,8 +4,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Optional;
 
+import com.lopez.app.restaurante.models.Mesa;
+import com.lopez.app.restaurante.models.Mesero;
+import com.lopez.app.restaurante.models.OrdenMeseroMesa;
 import com.lopez.app.restaurante.models.Ordenar;
+import com.lopez.app.restaurante.service.IOrdenarService;
 import com.lopez.app.restaurante.service.IService;
+import com.lopez.app.restaurante.service.MesaService;
+import com.lopez.app.restaurante.service.MeseroService;
 import com.lopez.app.restaurante.service.OrdenarService;
 
 import jakarta.servlet.ServletException;
@@ -20,7 +26,9 @@ public class DetalleOrdenarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection conn = (Connection) req.getAttribute("conn");
 
-        IService<Ordenar> service = new OrdenarService(conn);
+        IOrdenarService<Ordenar> service = new OrdenarService(conn);
+        IService<Mesa> serviceMesa = new MesaService(conn);
+        IService<Mesero> serviceMesero = new MeseroService(conn);
 
         long id;
 
@@ -37,8 +45,17 @@ public class DetalleOrdenarServlet extends HttpServlet {
             Optional<Ordenar> optional = service.getByID(id);
 
             if (optional.isPresent()) {
+                OrdenMeseroMesa ordenMeseroMesa = new OrdenMeseroMesa();
                 ordenar = optional.get();
-                req.setAttribute("orden", ordenar);
+
+                Mesa mesa = serviceMesa.getByID(ordenar.getId_mesa()).get();
+
+                Mesero mesero = serviceMesero.getByID(ordenar.getId_mesero()).get();
+
+                ordenMeseroMesa.setMesa(mesa);
+                ordenMeseroMesa.setMesero(mesero);
+                ordenMeseroMesa.setOrdenar(ordenar);
+                req.setAttribute("orden", ordenMeseroMesa);
                 getServletContext().getRequestDispatcher("/DetalleOrden.jsp").forward(req, resp);
 
             } else {

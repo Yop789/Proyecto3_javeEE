@@ -183,9 +183,11 @@ List<Mesa> mesas = (List<Mesa>) request.getAttribute("mesas");
               url: "http://localhost:8080/ApiRestaurante/altaReservacion", 
               data: formData,
               success: function (response) {
-                alert("Datos guardados correctamente");
+                
+                window.location.href = "<%= request.getContextPath() %>/reservaciones/detalle?id="+response.reservacionId;
+                
               }, error: function (xhr, status, error) {
-                window.location.href = "<%= request.getContextPath() %>/reservaciones/listar";
+                
               }
             });
           } else {

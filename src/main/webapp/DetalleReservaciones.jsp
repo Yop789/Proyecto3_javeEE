@@ -46,7 +46,7 @@ ReservacionMesaCliente reservacion = (ReservacionMesaCliente) request.getAttribu
                             Número de Mesa: <%= reservacion. getMesa().getNum_mesa() %> <br>
                             Capacidad: <%= reservacion. getMesa().getCapacidad() %> <br>
                             Lugar: <%= reservacion. getMesa().getLugar() %> <br>
-                            Estado: <%= reservacion. getMesa().getEstado() %></td>
+                            </td>
                     </tr>
                     <tr>
                         <th>Cliente</th>
