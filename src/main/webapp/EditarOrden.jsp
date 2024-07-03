@@ -50,7 +50,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                     <select id="id_mesa" name="id_mesa" class="form-control">
                         <option value="">---Seleccione una mesa---</option>
                         <% for (Mesa mesa : mesas) { %>
-                        <option value="<%= mesa.getId_mesa() %>" <%= mesa.getId_mesa().equals(orden.getId_mesa()) ? "selected" : "" %>><%= mesa.getNum_mesa() %> - <%= mesa.getCapacidad() %> personas</option>
+                        <option value="<%= mesa.getId_mesa() %>" <%= mesa.getId_mesa().equals(orden.getId_mesa()) ? "selected" : "" %>>Numero de mesa: <%= mesa.getNum_mesa() %> capacidad: <%= mesa.getCapacidad() %> descripcion: <%= mesa.getLugar()%></option>
                         <% } %>
                     </select>
                     <% if (errors != null && errors.containsKey("id_mesa")) { %>

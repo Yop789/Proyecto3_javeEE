@@ -38,7 +38,7 @@ Reservacio reservacion = (Reservacio) request.getAttribute("reservacio");
                         <label for="id_mesa">Mesa</label>
                         <select id="id_mesa" name="id_mesa" class="form-control">
                             <% for (Mesa mesa : mesas) { %>
-                                <option value="<%= mesa.getId_mesa() %>" <%= mesa.getId_mesa() == reservacion.getId_mesa() ? "selected" : "" %>><%= mesa.getNum_mesa() %> - <%= mesa.getCapacidad() %> personas</option>
+                                <option value="<%= mesa.getId_mesa() %>" <%= mesa.getId_mesa() == reservacion.getId_mesa() ? "selected" : "" %>>Numero de mesa: <%= mesa.getNum_mesa() %> capacidad: <%= mesa.getCapacidad() %> descripcion: <%= mesa.getLugar()%></option>
                             <% } %>
                         </select>
                         <% if (errors != null && errors.containsKey("id_mesa")) { %>

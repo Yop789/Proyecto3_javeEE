@@ -6,6 +6,8 @@
 <%
 List<Platillo> platillo = (List<Platillo>) request.getAttribute("platillos");
 List<Ordenar> ordenars = (List<Ordenar>) request.getAttribute("ordenars");
+List<Mesa> mesas = (List<Mesa>) request.getAttribute("mesas");
+List<Mesero> meseros = (List<Mesero>) request.getAttribute("meseros");
 Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");
 %>
 
@@ -46,7 +48,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                         <select id="id_mesa" name="id_mesa" class="form-control">
                             <option value="">---Seleccione una mesa---</option>
                             <% for (Mesa mesa : mesas) { %>
-                                <option value="<%= mesa.getId_mesa() %>"><%= mesa.getNum_mesa() %> - <%= mesa.getCapacidad() %> personas</option>
+                                <option value="<%= mesa.getId_mesa() %>">Numero de mesa: <%= mesa.getNum_mesa() %> capacidad: <%= mesa.getCapacidad() %> descripcion: <%= mesa.getLugar()%></option>
                             <% } %>
                         </select>
                         <% if (errors != null && errors.containsKey("id_mesa")) { %>

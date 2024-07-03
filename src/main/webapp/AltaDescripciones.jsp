@@ -46,7 +46,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                     <select id="id_Orden" name="id_Orden" class="form-control">
                         <option value="">---Seleccione un orden---</option>
                         <% for (Ordenar ordenar : ordenars) { %>
-                            <option value="<%= ordenar.getId() %>"><%= ordenar.getId_mesero() %> <%= ordenar.getFecha() %> </option>
+                            <option value="<%= ordenar.getId() %>">Num. Orden <%= ordenar.getId() %> Num. Mesa<%= ordenar.getId_mesero() %> Fecha: <%= ordenar.getFecha() %> </option>
                         <% } %>
                     </select>
                 </div>
@@ -146,9 +146,7 @@ Map<String, String> errors = (Map<String, String>) request.getAttribute("errors"
                     contentType: 'application/json',
                     data: JSON.stringify(ordenData),
                     success: function(response) {
-                        alert('Orden enviada exitosamente.');
-                        // Puedes manejar la respuesta del servidor aquí si es necesario
-                        // Por ejemplo, redireccionar a otra página o mostrar un mensaje de éxito
+                        window.location.href = "http://localhost:8080/UnPractica/descripciones/listar";
                     },
                     error: function(xhr, status, error) {
                         alert('Error al enviar la orden.');

@@ -179,10 +179,17 @@
                 </li>
                 <li>
                   <a href="<%=request.getContextPath()%>/descripciones/alta"
-                    >Detallar una Orden</a
+                    >Alta Descripcion de orden</a
                   >
                 </li>
               </ul>
+            </li>
+            <li class="dropdown">
+              <a
+                href="<%=request.getContextPath()%>/cliente-reserva"
+                class="dropdown-toggle"
+                >Cliente Reservacion</a>
+              
             </li>
           </ul>
         </div>

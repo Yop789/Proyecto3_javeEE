@@ -69,6 +69,10 @@ ReservacionMesaCliente reservacion = (ReservacionMesaCliente) request.getAttribu
                         <th>Estatus</th>
                         <td><%= reservacion.getReservacio().getEstatus() %></td>
                     </tr>
+                    <%-- <tr>
+                        <th>IdPaypal</th>
+                        <td><%= reservacion.getReservacio().getIdOrderPypal() %></td>
+                    </tr> --%>
                 </table>
                 <a href="<%= request.getContextPath() %>/reservaciones/listar" class="btn btn-secondary">Volver</a>
             </div>

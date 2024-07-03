@@ -51,8 +51,11 @@ public class DescripcioService implements IDescripcioOrdenService<DescripcioOrde
 
     @Override
     public void eliminar(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        try {
+            descripcioRepo.eliminar(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override

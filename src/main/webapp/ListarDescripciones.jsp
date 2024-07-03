@@ -29,7 +29,7 @@ List<DescripcioOrden> descripciones = (List<DescripcioOrden>) request.getAttribu
             <h2>Listado con la descripcion de la orden</h2>
         </div>
         <div class="col-md-6 text-right">
-            <a href="<%= request.getContextPath() %>/reservaciones/alta" class="btn btn-success">Alta de Reservacio</a>
+            <a href="<%= request.getContextPath()%>/descripciones/alta" class="btn btn-success">Alta de Reservacio</a>
         </div>
     </div>
 
@@ -44,6 +44,8 @@ List<DescripcioOrden> descripciones = (List<DescripcioOrden>) request.getAttribu
                             <th>Platillo</th>
                             <th>Cantidad</th>
                             <th>Estado</th>
+                            <th></th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -55,7 +57,14 @@ List<DescripcioOrden> descripciones = (List<DescripcioOrden>) request.getAttribu
                             <td><%= r.getId_platillo() %></td>
                             <td><%= r.getCantidad() %></td>
                             <td><%= r.getEstatus() %></td>
+                            <td>
+                                <a href="<%= request.getContextPath() %>/descripciones/detalles?id=<%= r.getId() %>" class="btn btn-success">Detalle</a>
+                            </td>
+                            <td>
+                                <a href="<%= request.getContextPath() %>/descripciones/eliminar?id=<%= r.getId() %>" class="btn btn-danger">Eliminar</a>
+                            </td>
                         </tr>
+
                         <% } %>
                     </tbody>
                 </table>
